@@ -11,7 +11,7 @@ const DatePicker = () => {
 
   return (
     <div className="w-full p-[18px] bg-white flex flex-col gap-5 rounded-lg">
-      <div className="text-xl font-semibold">
+      <div className="md:text-lg font-semibold">
         Kapan Anda Membutuhkan Jasa? <span className="text-red-600">*</span>
       </div>
       <div className="w-full">

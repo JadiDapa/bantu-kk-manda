@@ -6,7 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 
 const Carousell = () => {
   return (
-    <div className="h-56 w-full relative ">
+    <div className="md:h-56 max-md:w-full">
       <div className="rounded-xl overflow-hidden">
         <Carousel
           className=""

@@ -12,11 +12,11 @@ const Accordion: React.FC<AccordionProps> = ({ children }: AccordionProps) => {
     <div className="w-full bg-white">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between border-2 border-grey p-[18px]"
+        className="flex items-center justify-between border md:border-2 border-grey p-[18px]"
         style={{ cursor: "pointer" }}
       >
-        <div className="text-lg">Lorem ipsum dolor sit amet.</div>
-        <div className="text-2xl text-slate-500">
+        <div className=" text-sm md:text-lg">Lorem ipsum dolor sit amet.</div>
+        <div className="md:text-xl text-slate-500">
           <IoIosArrowDown
             className={`${
               isOpen ? "rotate-180" : "rotate-0"
@@ -29,7 +29,7 @@ const Accordion: React.FC<AccordionProps> = ({ children }: AccordionProps) => {
           isOpen ? "max-h-[500px] " : "max-h-0"
         } overflow-hidden border-grey transition-height duration-500`}
       >
-        <div className="leading-[18px] p-[18px] flex flex-col gap-4 text-lg">
+        <div className="leading-4 md:leading-[18px] p-[18px] flex flex-col gap-4 text-sm md:text-lg">
           {children}
         </div>
       </div>

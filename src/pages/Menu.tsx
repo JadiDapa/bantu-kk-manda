@@ -15,7 +15,7 @@ const Menu = () => {
   return (
     <div className="pb-[136px]">
       <Navbar title={"Massage"} />
-      <div className="px-[25%] mt-[60px]">
+      <div className="md:px-[25%] px-3 mt-[60px]">
         <Carousel />
         <div className=" mt-3.5 rounded-xl overflow-hidden ">
           <Accordion>
@@ -59,7 +59,7 @@ const Menu = () => {
             </p>
           </Accordion>
         </div>
-        <div className="italic mt-3.5 p-[18px] bg-[#FFFF99] rounded-lg text-lg leading-5 font-[400] ">
+        <div className="max-md:text-sm/4 italic mt-3.5 p-[18px] bg-[#FFFF99] rounded-lg leading-5 font-[400] ">
           Pastikan kwitansi/invoice yang diterbitkan dari Sejasa
           <strong> sesuai</strong> dengan pengerjaan sesungguhnya di tempat
           Anda. Jika tidak sesuai, garansi kebersihan Anda akan
@@ -97,7 +97,7 @@ const Menu = () => {
         <div className="mt-3.5">
           <TimePicker />
         </div>
-        <div className="my-4 font-[500] text-lg text-center text-darkgrey">
+        <div className="my-4 font-[500] text-sm md:text-lg text-center text-darkgrey">
           Powered By <b>WebApe.com</b>
         </div>
       </div>

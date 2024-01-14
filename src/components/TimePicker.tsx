@@ -37,11 +37,11 @@ const TimePicker: React.FC = () => {
 
   return (
     <div className="p-[18px] bg-white rounded-lg flex flex-col gap-4">
-      <div className="text-xl font-semibold">
+      <div className="md:text-lg font-semibold">
         Pukul berapa Anda membutuhkan layanan?{" "}
         <span className="text-red-600">*</span>
       </div>
-      <div className="border-[3px] text-lg py-3 rounded-xl border-grey hover:border-magenta w-full flex items-center justify-evenly transition-all duration-300">
+      <div className="border-[3px] text-lg py-2 md:py-3 rounded-xl border-grey hover:border-magenta w-full flex items-center justify-evenly transition-all duration-300">
         <select
           onChange={arrangeHour}
           id="hours"
