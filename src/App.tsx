@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import Menu from "./pages/Menu";
 import UserData from "./pages/UserData";
 import Verification from "./pages/Verification";
@@ -10,7 +10,7 @@ interface ViewContextProps {
 
 const defaultValue: ViewContextProps = {
   view: "",
-  setView: "",
+  setView: undefined,
 };
 
 export const ViewContext = createContext(defaultValue);
