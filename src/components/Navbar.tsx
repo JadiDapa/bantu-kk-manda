@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { ViewContext } from "../App";
 
 interface NavbarProps {
   title: string;
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 const Navbar = ({ title, isNext, verificating }: NavbarProps) => {
   const [scrolling, setScrolling] = useState(false);
+  const { setView } = useContext(ViewContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +31,12 @@ const Navbar = ({ title, isNext, verificating }: NavbarProps) => {
       <div
         className={`${scrolling ? "bg-white shadow-md" : "bg-[#eff3f7]"} ${
           verificating && "justify-center bg-white "
-        } h-[60px] w-full px-[25%] flex items-center fixed top-0 transition-all duration-500`}
+        }  h-[60px] w-full px-[25%] flex items-center fixed top-0 transition-all duration-500`}
       >
-        <div className=" font-semibold text-xl flex gap-1 items-center">
+        <div
+          onClick={() => setView("menu")}
+          className="cursor-pointer font-semibold text-xl flex gap-1 items-center"
+        >
           {isNext && (
             <span className="text-4xl ">
               <IoIosArrowBack />

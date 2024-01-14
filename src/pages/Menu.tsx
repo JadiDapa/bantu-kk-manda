@@ -13,9 +13,47 @@ const Menu = () => {
       <Navbar title={"Massage"} />
       <div className="px-[25%] mt-[60px]">
         <Carousel />
-        <div className=" rounded-xl flex flex-col gap-0.5 overflow-hidden ">
-          <Accordion />
-          <Accordion />
+        <div className=" mt-3.5 rounded-xl overflow-hidden ">
+          <Accordion>
+            <p>
+              Rilekskan tubuh dan kendurkan otot-otot yang tegang dengan terapi
+              kesehatan tradisional. Pemijatan ditangani oleh terapis
+              berpengalaman dan profesional.
+            </p>
+            <p>
+              <b>Beberapa informasi penting seputar Layanan Massage:</b>
+              <br />
+              1. Sejasa menolak segala bentuk pelecehan seksual. <br />
+              2. Sejasa akan menindak tegas oknum pelecehan sesuai hukum dan UU
+              yang berlaku.
+              <br /> 3. Kami menjamin kenyamanan Anda saat proses pemijatan.
+              <br /> Anda dapat melihat rating dan review terapis yang bertugas.
+              <br />
+              4. Terapis akan menyediakan handuk/ kain bersih, alas kain, dan
+              minyak pijat yang dibutuhkan saat proses memijat. <br />
+              5. Customer menyediakan matras untuk pijat.
+            </p>
+          </Accordion>
+          <Accordion>
+            <p>
+              Rilekskan tubuh dan kendurkan otot-otot yang tegang dengan terapi
+              kesehatan tradisional. Pemijatan ditangani oleh terapis
+              berpengalaman dan profesional.
+            </p>
+            <p>
+              <b>Beberapa informasi penting seputar Layanan Massage:</b>
+              <br />
+              1. Sejasa menolak segala bentuk pelecehan seksual. <br />
+              2. Sejasa akan menindak tegas oknum pelecehan sesuai hukum dan UU
+              yang berlaku.
+              <br /> 3. Kami menjamin kenyamanan Anda saat proses pemijatan.
+              <br /> Anda dapat melihat rating dan review terapis yang bertugas.
+              <br />
+              4. Terapis akan menyediakan handuk/ kain bersih, alas kain, dan
+              minyak pijat yang dibutuhkan saat proses memijat. <br />
+              5. Customer menyediakan matras untuk pijat.
+            </p>
+          </Accordion>
         </div>
         <div className="italic mt-3.5 p-[18px] bg-[#FFFF99] rounded-lg text-lg leading-5 font-[400] ">
           Pastikan kwitansi/invoice yang diterbitkan dari Sejasa

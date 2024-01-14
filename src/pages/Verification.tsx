@@ -1,18 +1,24 @@
+import { useContext } from "react";
 import Navbar from "../components/Navbar";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
+import { ViewContext } from "../App";
 
 interface VerificationProps {
   phoneNumber: string;
 }
 
-const Verification = ({ phoneNumber = "0823948592783" }) => {
+const Verification = ({ phoneNumber = "0823948592783" }: VerificationProps) => {
+  const { setView } = useContext(ViewContext);
   return (
     <div className="pb-[160px]">
       <Navbar title={"NamaWeb.com"} verificating />
 
       <div className="px-[25%] mt-[60px]">
-        <div className="py-4 flex gap-4 items-center font-semibold text-darkgrey text-lg">
+        <div
+          onClick={() => setView("user-data")}
+          className="py-4 flex gap-4 items-center font-semibold text-darkgrey text-lg cursor-pointer"
+        >
           <span>
             <FaArrowLeft />
           </span>
@@ -34,11 +40,13 @@ const Verification = ({ phoneNumber = "0823948592783" }) => {
             <input className="px-2 w-36 tracking-[1em] text-2xl border-b-4 outline-none focus:border-magenta transition-all duration-300 " />
           </div>
           <div className="">
-            <button className=" mt-4 w-1/2 py-2 bg-magenta text-white text-2xl rounded-lg">
+            <button className=" mt-4 w-1/2 py-2 bg-magenta text-white text-2xl rounded-lg cursor-pointer">
               Verifikasi
             </button>
             <div className="mt-4 mb-1">Tidak dapat kode verifikasi?</div>
-            <div className="font-semibold text-magenta">Kirim Ulang</div>
+            <div className="font-semibold text-magenta cursor-pointer">
+              Kirim Ulang
+            </div>
           </div>
         </div>
       </div>

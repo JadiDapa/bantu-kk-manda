@@ -1,10 +1,14 @@
+import { useContext } from "react";
 import { IoCheckboxOutline } from "react-icons/io5";
+import { ViewContext } from "../App";
 
 interface SummaryProps {
   estimated: string;
 }
 
 const Summary = ({ estimated }: SummaryProps) => {
+  const { view, setView } = useContext(ViewContext);
+
   return (
     <div className="w-full fixed bottom-0 left-0">
       <div className=" py-[18px] bg-white px-[25%] text-lg flex gap-2 border-b-2 border-grey">
@@ -27,7 +31,12 @@ const Summary = ({ estimated }: SummaryProps) => {
           </div>
         </div>
         <div className="flex-1">
-          <button className="w-full py-2 bg-magenta text-white text-2xl rounded-lg">
+          <button
+            onClick={() =>
+              setView(view === "user-data" ? "verification" : "user-data")
+            }
+            className="w-full py-2 bg-magenta text-white text-2xl rounded-lg cursor-pointer"
+          >
             Selanjutnya
           </button>
         </div>
