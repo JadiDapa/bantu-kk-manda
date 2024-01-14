@@ -16,14 +16,14 @@ const Accordion = ({ children }) => {
           <IoIosArrowDown
             className={`${
               isOpen ? "rotate-180" : "rotate-0"
-            } transition-all duration-300`}
+            } transition-all duration-500`}
           />
         </div>
       </div>
       <div
         className={`${
           isOpen ? "max-h-[500px] " : "max-h-0"
-        } overflow-hidden border-grey transition-height duration-300`}
+        } overflow-hidden border-grey transition-height duration-500`}
       >
         <div className="leading-[18px] p-[18px] flex flex-col gap-4 text-lg">
           {children}

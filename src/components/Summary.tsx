@@ -11,7 +11,7 @@ const Summary = ({ estimated }: SummaryProps) => {
 
   return (
     <div className="w-full fixed bottom-0 left-0">
-      <div className=" py-[18px] bg-white px-[25%] text-lg flex gap-2 border-b-2 border-grey">
+      <div className=" py-3 bg-white px-[25%] text-lg flex gap-2 border-b-2 border-grey">
         <span className="text-magenta">
           <IoCheckboxOutline />
         </span>
@@ -23,12 +23,10 @@ const Summary = ({ estimated }: SummaryProps) => {
           </a>
         </span>
       </div>
-      <div className="w-full py-[18px] bg-white px-[25%] text-lg flex justify-between items-center">
+      <div className="w-full py-3 bg-white px-[25%] text-lg flex justify-between items-center">
         <div className="flex-1">
           <div className="te">Estimasi Harga</div>
-          <div className="text-[#34B5D1] text-3xl font-semibold">
-            Rp{estimated}
-          </div>
+          <div className="text-blue text-3xl font-semibold">Rp{estimated}</div>
         </div>
         <div className="flex-1">
           <button

@@ -6,6 +6,10 @@ import Option from "../components/Option";
 import OrderItem from "../components/OrderItem";
 import Summary from "../components/Summary";
 import TimePicker from "../components/TimePicker";
+import { regular, prem, jasaTambahan } from "../utils/static.js";
+import message from "/msg.jpg";
+import premium from "/premsg.jpg";
+import tambahan from "/jasatambahan.jpg";
 
 const Menu = () => {
   return (
@@ -63,9 +67,17 @@ const Menu = () => {
           ketentuan”.
         </div>
         <div className="mt-3.5 flex flex-col gap-3.5">
-          <OrderItem title={"Regular Massage"} />
-          <OrderItem title={"Premium Massage"} />
-          <OrderItem title={"Jasa Lain (Opsional)"} />
+          <OrderItem
+            title={"Regular Massage"}
+            menus={regular}
+            image={message}
+          />
+          <OrderItem title={"Premium Massage"} menus={prem} image={premium} />
+          <OrderItem
+            title={"Jasa tambahan lain (opsional)"}
+            menus={jasaTambahan}
+            image={tambahan}
+          />
         </div>
         <div className="mt-3.5 flex flex-col gap-3.5">
           <Option

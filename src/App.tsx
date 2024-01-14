@@ -12,7 +12,7 @@ const App = () => {
     <ViewContext.Provider value={{ view, setView }}>
       {view === "menu" && <Menu />}
       {view === "user-data" && <UserData />}
-      {view === "verification" && <Verification />}
+      {view === "verification" && <Verification phoneNumber={"089523927152"} />}
     </ViewContext.Provider>
   );
 };
