@@ -12,17 +12,19 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const;
+
   return (
     <>
       <div className="py-[18px] bg-white rounded-lg flex flex-col">
         <div className="px-[18px] md:text-lg font-semibold">{title} </div>
         <div className="flex p-[18px] gap-x-[18px] ">
           <img src={image} alt="" className="w-[60px] rounded-md" />
-          <div className="flex flex-col justify-between w-full">
+          <div className="flex flex-col justify-between max-md::w-full">
             <div className="max-md:text-sm leading-3 font-medium">{title}</div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex  w-full justify-center md:justify-between items-center px-4 py-2 rounded-lg border gap-4 border-magenta text-magenta hover:bg-magenta hover:text-white  duration-300 transition-all"
+              className="flex  max-md:w-full justify-center md:justify-between items-center px-4 py-2 rounded-lg border gap-4 border-magenta text-magenta hover:bg-magenta hover:text-white  duration-300 transition-all"
             >
               <span className="max-md:text-sm">
                 {isOpen ? "Sembunyikan" : "Selengkapnya"}
