@@ -12,8 +12,6 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const;
-
   return (
     <>
       <div className="py-[18px] bg-white rounded-lg flex flex-col">
