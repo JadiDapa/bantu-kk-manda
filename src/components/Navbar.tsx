@@ -31,7 +31,7 @@ const Navbar = ({ title, isNext, verificating }: NavbarProps) => {
       <div
         className={`${scrolling ? "bg-white shadow-md" : "bg-[#eff3f7]"} ${
           verificating && "justify-center bg-white "
-        }  h-[60px] w-full px-[25%] flex items-center fixed top-0 transition-all duration-500`}
+        }  h-[60px] w-full px-[25%] flex items-center fixed top-0 transition-all duration-500 z-50`}
       >
         <div
           onClick={() => setView("menu")}

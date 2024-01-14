@@ -1,5 +1,5 @@
 import Accordion from "../components/Accordion";
-import Carousel from "../components/Carousel";
+import Carousel from "../components/Carousell.js";
 import DatePicker from "../components/DatePicker";
 import Navbar from "../components/Navbar";
 import Option from "../components/Option";
@@ -13,7 +13,7 @@ import tambahan from "/jasatambahan.jpg";
 
 const Menu = () => {
   return (
-    <div className="pb-[160px]">
+    <div className="pb-[136px]">
       <Navbar title={"Massage"} />
       <div className="px-[25%] mt-[60px]">
         <Carousel />

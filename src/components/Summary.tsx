@@ -37,6 +37,7 @@ const Summary = ({ estimated }: SummaryProps) => {
         <div className="flex-1">
           <button
             onClick={handleViewChange}
+            type="submit"
             className="w-full py-2 bg-magenta text-white text-2xl rounded-lg cursor-pointer"
           >
             Selanjutnya

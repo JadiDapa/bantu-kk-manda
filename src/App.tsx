@@ -3,17 +3,7 @@ import Menu from "./pages/Menu";
 import UserData from "./pages/UserData";
 import Verification from "./pages/Verification";
 
-interface ViewContextProps {
-  view: string;
-  setView: React.Dispatch<React.SetStateAction<string>> | undefined;
-}
-
-const defaultValue: ViewContextProps = {
-  view: "",
-  setView: undefined,
-};
-
-export const ViewContext = createContext(defaultValue);
+export const ViewContext = createContext();
 
 const App = () => {
   const [view, setView] = useState("menu");

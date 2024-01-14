@@ -8,8 +8,9 @@ interface VerificationProps {
   phoneNumber: string;
 }
 
-const Verification = ({ phoneNumber = "0823948592783" }: VerificationProps) => {
+const Verification = ({ phoneNumber }: VerificationProps) => {
   const { setView } = useContext(ViewContext);
+
   return (
     <div className="pb-[160px]">
       <Navbar title={"NamaWeb.com"} verificating />
