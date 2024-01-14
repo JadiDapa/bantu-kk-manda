@@ -9,6 +9,12 @@ interface SummaryProps {
 const Summary = ({ estimated }: SummaryProps) => {
   const { view, setView } = useContext(ViewContext);
 
+  const handleViewChange = () => {
+    if (setView) {
+      setView(view === "user-data" ? "verification" : "user-data");
+    }
+  };
+
   return (
     <div className="w-full fixed bottom-0 left-0">
       <div className=" py-3 bg-white px-[25%] text-lg flex gap-2 border-b-2 border-grey">
@@ -30,9 +36,7 @@ const Summary = ({ estimated }: SummaryProps) => {
         </div>
         <div className="flex-1">
           <button
-            onClick={() =>
-              setView(view === "user-data" ? "verification" : "user-data")
-            }
+            onClick={handleViewChange}
             className="w-full py-2 bg-magenta text-white text-2xl rounded-lg cursor-pointer"
           >
             Selanjutnya

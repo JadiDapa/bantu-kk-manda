@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
-const Accordion = ({ children }) => {
+interface AccordionProps {
+  children: ReactNode;
+}
+
+const Accordion: React.FC<AccordionProps> = ({ children }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

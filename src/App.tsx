@@ -1,9 +1,19 @@
-import { createContext, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import Menu from "./pages/Menu";
 import UserData from "./pages/UserData";
 import Verification from "./pages/Verification";
 
-export const ViewContext = createContext();
+interface ViewContextProps {
+  view: string;
+  setView: React.Dispatch<React.SetStateAction<string>> | undefined;
+}
+
+const defaultValue: ViewContextProps = {
+  view: "",
+  setView: "",
+};
+
+export const ViewContext = createContext(defaultValue);
 
 const App = () => {
   const [view, setView] = useState("menu");
