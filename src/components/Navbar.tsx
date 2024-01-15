@@ -10,7 +10,7 @@ interface NavbarProps {
 
 const Navbar = ({ title, isNext, verificating }: NavbarProps) => {
   const [scrolling, setScrolling] = useState(false);
-  const { setView } = useContext(ViewContext);
+  const { setView } = useContext(ViewContext) ?? { setView: () => {} };
 
   useEffect(() => {
     const handleScroll = () => {

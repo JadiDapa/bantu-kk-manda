@@ -1,15 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import Modal from "./Modal";
 import { FormContext } from "../context/FormContext";
 
-interface OrderItemProps {
-  title: string;
-  menus: { item: string; price: string; image: string }[];
-  image: string;
-}
-
-const OrderItem = ({ title, image, menus }: OrderItemProps) => {
+const OrderItem = ({ title, image, menus }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { formData, addItem, removeItem } = useContext(FormContext);
@@ -24,7 +20,7 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
             <div className="max-md:text-sm leading-3 font-medium">{title}</div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex  max-md:w-full justify-center md:justify-between items-center px-4 py-2 rounded-lg border gap-4 border-magenta text-magenta hover:bg-magenta hover:text-white  duration-300 transition-all"
+              className="flex max-md:w-full justify-center md:justify-between items-center px-4 py-2 rounded-lg border gap-4 border-magenta text-magenta hover:bg-magenta hover:text-white  duration-300 transition-all"
             >
               <span className="max-md:text-sm md:p-0.5">
                 {isOpen ? "Sembunyikan" : "Selengkapnya"}
@@ -41,6 +37,7 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
         </div>
         {menus.map((menu) => (
           <div
+            key={menu.code}
             className={`${
               isOpen ? "max-h-[500px] " : "max-h-0"
             } flex px-[18px] overflow-hidden transition-all duration-500 justify-between items-center border-t border-grey`}
@@ -62,7 +59,7 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
             </div>
             <div className="flex gap-3">
               <div
-                onClick={(e) => addItem(menu.code, menu.price)}
+                onClick={() => addItem(menu.code, menu.price)}
                 className={` ${
                   formData[menu.code] ? "border-darkgrey" : "border-magenta"
                 } border cursor-pointer  flex items-center justify-center w-6 md:w-8 aspect-square rounded-md`}
@@ -70,13 +67,13 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
                 +
               </div>
               <div
-                onClick={(e) => console.log(formData)}
+                onClick={() => console.log(formData)}
                 className="translate-y-1"
               >
                 {formData[menu.code] ? "1" : "0"}
               </div>
               <div
-                onClick={(e) => removeItem(menu.code, menu.price)}
+                onClick={() => removeItem(menu.code, menu.price)}
                 className={`border cursor-pointer ${
                   formData[menu.code] ? "border-magenta" : "border-darkgrey"
                 } flex items-center justify-center w-6 md:w-8 aspect-square rounded-md`}

@@ -7,13 +7,15 @@ import { FormContext } from "../context/FormContext";
 import ModalData from "../components/ModalData";
 
 const Verification = () => {
-  const { setView } = useContext(ViewContext);
-  const { formData } = useContext(FormContext);
+  const { setView } = useContext(ViewContext) ?? { setView: () => {} };
+  const { formData } = useContext(FormContext) ?? {
+    formData: { phoneNumber: "" },
+  };
   const [countdown, setCountdown] = useState(60);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    let interval;
+    let interval: number;
 
     if (countdown > 0) {
       interval = setInterval(() => {

@@ -4,8 +4,8 @@ import { ViewContext } from "../context/ViewContext";
 import { FormContext } from "../context/FormContext";
 
 const Summary = () => {
-  const { view, setView } = useContext(ViewContext);
-  const { formData } = useContext(FormContext);
+  const { view, setView } = useContext(ViewContext) ?? {};
+  const { formData } = useContext(FormContext) ?? { formData: { total: "0" } };
 
   const handleViewChange = () => {
     if (setView) {

@@ -1,17 +1,50 @@
-import { createContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 
-export const FormContext = createContext();
+interface FormData {
+  regular1: boolean;
+  regular2: boolean;
+  regular3: boolean;
+  premium1: boolean;
+  premium2: boolean;
+  premium3: boolean;
+  tambahan1: boolean;
+  tambahan2: boolean;
+  userGender: string;
+  massagerGender: string;
+  selectedDate: string;
+  selectedTime: string;
+  total: string;
+  note: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  acceptPromotion: boolean;
+  location: string;
+  detailedAddress: string;
+}
 
-export const FormContextProvider = ({ children }) => {
-  const [formData, setFormData] = useState({
-    regular1: "",
-    regular2: "",
-    regular3: "",
-    premium1: "",
-    premium2: "",
-    premium3: "",
-    tambahan1: "",
-    tambahan2: "",
+interface FormContextProps {
+  formData: FormData;
+  handleChange: (field: string, value: string) => void;
+  handleSubmit: (e: React.FormEvent) => void;
+  addItem: (field: string, value: string) => void;
+  removeItem: (field: string, value: string) => void;
+}
+
+export const FormContext = createContext<FormContextProps | undefined>(
+  undefined
+);
+
+export const FormContextProvider = ({ children }: { children: ReactNode }) => {
+  const [formData, setFormData] = useState<FormData>({
+    regular1: false,
+    regular2: false,
+    regular3: false,
+    premium1: false,
+    premium2: false,
+    premium3: false,
+    tambahan1: false,
+    tambahan2: false,
     userGender: "",
     massagerGender: "",
     selectedDate: "",
@@ -51,7 +84,7 @@ export const FormContextProvider = ({ children }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formData);
   };

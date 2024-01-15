@@ -5,7 +5,11 @@ import { useContext } from "react";
 import { FormContext } from "../context/FormContext";
 
 const UserData = () => {
-  const { formData, handleChange, handleSubmit } = useContext(FormContext);
+  const { formData, handleChange, handleSubmit } = useContext(FormContext) ?? {
+    formData: { "": "" },
+    handleChange: () => {},
+    handleSubmit: () => {},
+  };
 
   return (
     <div className="pb-[136px]">
@@ -83,7 +87,7 @@ const UserData = () => {
             <div className="flex items-center gap-4 pl-2">
               <input
                 onChange={(e) =>
-                  handleChange("acceptPromotion", e.target.checked)
+                  handleChange("acceptPromotion", e.target.value)
                 }
                 value={"agree"}
                 type="checkbox"
