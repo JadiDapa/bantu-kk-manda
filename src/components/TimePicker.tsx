@@ -2,7 +2,9 @@ import { ChangeEvent, useContext, useState } from "react";
 import { FormContext } from "../context/FormContext";
 
 const TimePicker: React.FC = () => {
-  const { handleChange } = useContext(FormContext);
+  const { handleChange } = useContext(FormContext) ?? {
+    handleChange: () => {},
+  };
   const [time, setTime] = useState<string>("12:00");
 
   function arrangeHour(e: ChangeEvent<HTMLSelectElement>) {

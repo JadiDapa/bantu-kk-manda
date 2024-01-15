@@ -13,7 +13,9 @@ const Option = ({ question, opt1, opt2, input }: OptionProps) => {
   const option2ID = useId();
   const groupName = useId();
 
-  const { handleChange } = useContext(FormContext);
+  const { handleChange } = useContext(FormContext) ?? {
+    handleChange: () => {},
+  };
 
   return (
     <div className="bg-white rounded-lg">

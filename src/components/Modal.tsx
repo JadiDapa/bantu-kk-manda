@@ -1,6 +1,17 @@
 import { BsX } from "react-icons/bs";
 
-const Modal = ({ showModal, setShowModal, menus }) => {
+interface ModalProps {
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  menus: MenuItem[];
+}
+
+interface MenuItem {
+  item: string;
+  price: string;
+}
+
+const Modal = ({ showModal, setShowModal, menus }: ModalProps) => {
   return (
     <div
       className={`${

@@ -1,8 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
-export const ViewContext = createContext();
+interface ViewContextProps {
+  view: string;
+  setView: React.Dispatch<React.SetStateAction<string>>;
+}
 
-export const ViewContextProvider = ({ children }) => {
+export const ViewContext = createContext<ViewContextProps | undefined>(
+  undefined
+);
+
+export const ViewContextProvider = ({ children }: { children: ReactNode }) => {
   const [view, setView] = useState("menu");
 
   return (

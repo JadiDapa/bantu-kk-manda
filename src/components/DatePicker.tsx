@@ -3,13 +3,11 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FormContext } from "../context/FormContext";
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 const DatePicker = () => {
-  const { handleChange } = useContext(FormContext);
-  const [value, onChange] = useState<Value>(new Date());
+  const { handleChange } = useContext(FormContext) ?? {
+    handleChange: () => {},
+  };
+  const [value, onChange] = useState(new Date());
 
   return (
     <div className="w-full p-[18px] bg-white flex flex-col gap-5 rounded-lg">
