@@ -18,7 +18,7 @@ const Menu = () => {
       <div className="md:px-[25%] px-3 mt-[60px]">
         <Carousel />
         <div className=" mt-3.5 rounded-xl overflow-hidden ">
-          <Accordion>
+          <Accordion title="Tentang Layanan Massage Sejasa">
             <p>
               Rilekskan tubuh dan kendurkan otot-otot yang tegang dengan terapi
               kesehatan tradisional. Pemijatan ditangani oleh terapis
@@ -38,7 +38,7 @@ const Menu = () => {
               5. Customer menyediakan matras untuk pijat.
             </p>
           </Accordion>
-          <Accordion>
+          <Accordion title="Perlengkapan Massage Sejasa">
             <p>
               Rilekskan tubuh dan kendurkan otot-otot yang tegang dengan terapi
               kesehatan tradisional. Pemijatan ditangani oleh terapis
@@ -82,11 +82,13 @@ const Menu = () => {
         <div className="mt-3.5 flex flex-col gap-3.5">
           <Option
             question="Apa jenis kelamin Anda?"
+            input={"userGender"}
             opt1="Pria"
             opt2="Wanita"
           />
           <Option
             question="Preferensi jenis kelamin Mitra Sejasa"
+            input={"massagerGender"}
             opt1="Pria"
             opt2="Wanita"
           />
@@ -101,7 +103,7 @@ const Menu = () => {
           Powered By <b>WebApe.com</b>
         </div>
       </div>
-      <Summary estimated={"200.000"} />
+      <Summary />
     </div>
   );
 };

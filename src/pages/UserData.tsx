@@ -135,7 +135,7 @@ const UserData = () => {
             Powered By <b>WebApe.com</b>
           </div>
         </div>
-        <Summary estimated={"200.000"} />
+        <Summary />
       </form>
     </div>
   );

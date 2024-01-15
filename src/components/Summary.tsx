@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { ViewContext } from "../context/ViewContext";
+import { FormContext } from "../context/FormContext";
 
-interface SummaryProps {
-  estimated: string;
-}
-
-const Summary = ({ estimated }: SummaryProps) => {
+const Summary = () => {
   const { view, setView } = useContext(ViewContext);
+  const { formData } = useContext(FormContext);
 
   const handleViewChange = () => {
     if (setView) {
@@ -34,7 +32,7 @@ const Summary = ({ estimated }: SummaryProps) => {
         <div className="flex-1">
           <div className="text-sm md:text-base">Estimasi Harga</div>
           <div className="text-blue md:text-3xl text-lg font-medium">
-            Rp{estimated}
+            Rp{Number(formData.total).toLocaleString("en-US")}
           </div>
         </div>
         <div className="flex-1">

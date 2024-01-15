@@ -4,11 +4,13 @@ import { FaArrowLeft } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { ViewContext } from "../context/ViewContext";
 import { FormContext } from "../context/FormContext";
+import ModalData from "../components/ModalData";
 
 const Verification = () => {
   const { setView } = useContext(ViewContext);
   const { formData } = useContext(FormContext);
   const [countdown, setCountdown] = useState(60);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     let interval;
@@ -20,9 +22,10 @@ const Verification = () => {
     }
 
     return () => {
+      console.log(formData);
       clearInterval(interval);
     };
-  }, [countdown]);
+  }, [countdown, formData]);
 
   return (
     <div className="pb-[160px]">
@@ -58,7 +61,10 @@ const Verification = () => {
             <input className="px-2 w-40 tracking-[1em] text-2xl border-b-4 outline-none focus:border-magenta transition-all duration-300 " />
           </div>
           <div className="">
-            <button className=" mt-4 w-4/5 md:w-1/2 py-2 bg-magenta text-white text-lg md:text-2xl rounded-lg cursor-pointer">
+            <button
+              onClick={() => setShowModal(!showModal)}
+              className=" mt-4 w-4/5 md:w-1/2 py-2 bg-magenta text-white text-lg md:text-2xl rounded-lg cursor-pointer"
+            >
               Verifikasi
             </button>
             {countdown ? (
@@ -87,6 +93,11 @@ const Verification = () => {
           </div>
         </div>
       </div>
+      <ModalData
+        setShowModal={setShowModal}
+        showModal={showModal}
+        data={formData}
+      />
     </div>
   );
 };

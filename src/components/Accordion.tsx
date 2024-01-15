@@ -3,9 +3,13 @@ import { IoIosArrowDown } from "react-icons/io";
 
 interface AccordionProps {
   children: ReactNode;
+  title: string;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ children }: AccordionProps) => {
+const Accordion: React.FC<AccordionProps> = ({
+  children,
+  title,
+}: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,7 +19,7 @@ const Accordion: React.FC<AccordionProps> = ({ children }: AccordionProps) => {
         className="flex items-center justify-between border md:border-2 border-grey p-[18px]"
         style={{ cursor: "pointer" }}
       >
-        <div className=" text-sm md:text-lg">Lorem ipsum dolor sit amet.</div>
+        <div className=" text-sm md:text-lg">{title}</div>
         <div className="md:text-xl text-slate-500">
           <IoIosArrowDown
             className={`${

@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { FormContext } from "../context/FormContext";
 
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const DatePicker = () => {
+  const { handleChange } = useContext(FormContext);
   const [value, onChange] = useState<Value>(new Date());
 
   return (
@@ -17,7 +19,10 @@ const DatePicker = () => {
       <div className="w-full">
         <Calendar
           className={"w-full border-none"}
-          onChange={onChange}
+          onChange={() => {
+            onChange;
+            handleChange("selectedDate", value.toDateString());
+          }}
           value={value}
         />
       </div>

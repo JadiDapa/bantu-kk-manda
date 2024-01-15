@@ -1,7 +1,9 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
+import { FormContext } from "../context/FormContext";
 
 const TimePicker: React.FC = () => {
-  const [time, setTime] = useState<string>("");
+  const { handleChange } = useContext(FormContext);
+  const [time, setTime] = useState<string>("12:00");
 
   function arrangeHour(e: ChangeEvent<HTMLSelectElement>) {
     const hour = e.target.value;
@@ -16,6 +18,7 @@ const TimePicker: React.FC = () => {
   function updateTime(hour: string, minute: string) {
     const formattedTime = `${hour}:${minute}`;
     setTime(formattedTime);
+    handleChange("selectedTime", formattedTime);
   }
 
   const hours = [

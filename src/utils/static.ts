@@ -5,48 +5,56 @@ import tambahan from "/jasatambahan.jpg";
 export const regular = [
   {
     item: "Regular Massage 1 Jam",
-    price: "100.000",
+    price: "100000",
     image: message,
+    code: "regular1",
   },
   {
     item: "Regular Massage 1.5 Jam",
-    price: "160.000",
+    price: "160000",
     image: message,
+    code: "regular2",
   },
   {
     item: "Regular Massage 2 Jam",
-    price: "160.000",
+    price: "180000",
     image: message,
+    code: "regular3",
   },
 ];
 
 export const prem = [
   {
     item: "Premium Massage 1 Jam",
-    price: "170.000",
+    price: "170000",
     image: premium,
+    code: "premium1",
   },
   {
     item: "Premium Massage 1.5 Jam",
-    price: "200.000",
+    price: "200000",
     image: premium,
+    code: "premium2",
   },
   {
     item: "Premium Massage 2 Jam",
-    price: "225.000",
+    price: "225000",
     image: premium,
+    code: "premium3",
   },
 ];
 
 export const jasaTambahan = [
   {
     item: "Reflexology 0.5 Jam",
-    price: "40.000",
+    price: "40000",
     image: tambahan,
+    code: "tambahan1",
   },
   {
     item: "Reflexology 1 Jam",
-    price: "80.000",
+    price: "80000",
     image: tambahan,
+    code: "tambahan2",
   },
 ];

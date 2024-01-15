@@ -5,7 +5,8 @@ import Verification from "./pages/Verification";
 import { ViewContext } from "./context/ViewContext";
 
 const App = () => {
-  const { view, setView } = useContext(ViewContext);
+  const { view } = useContext(ViewContext);
+
   return (
     <>
       {view === "menu" && <Menu />}
