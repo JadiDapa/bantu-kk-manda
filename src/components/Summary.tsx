@@ -2,13 +2,23 @@ import { useContext, useState } from "react";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { ViewContext } from "../context/ViewContext";
 import { FormContext } from "../context/FormContext";
+import validator from "validator";
 
 interface SummaryProps {
-  validatedData: object;
-  handleValidatingData: (field: string, value: boolean) => void;
+  setNameVd: (message: string) => void;
+  setEmailVd: (message: string) => void;
+  setPhoneNumberVd: (message: string) => void;
+  setLocationVd: (message: string) => void;
+  setDetailedAddressVd: (message: string) => void;
 }
 
-const Summary = ({ validatedData, handleValidatingData }: SummaryProps) => {
+const Summary = ({
+  setNameVd,
+  setEmailVd,
+  setPhoneNumberVd,
+  setLocationVd,
+  setDetailedAddressVd,
+}: SummaryProps) => {
   const { view, setView } = useContext(ViewContext);
   const { formData } = useContext(FormContext);
   const [isMenuValid, setIsMenuValid] = useState<boolean>(true);
@@ -25,8 +35,8 @@ const Summary = ({ validatedData, handleValidatingData }: SummaryProps) => {
     formData.name &&
     formData.email &&
     formData.phoneNumber &&
-    formData.detailedAddress &&
-    formData.location;
+    formData.location &&
+    formData.detailedAddress;
 
   const handleViewChange = () => {
     if (view === "menu") {
@@ -50,12 +60,25 @@ const Summary = ({ validatedData, handleValidatingData }: SummaryProps) => {
         setView("verification");
         window.scrollTo(0, 0);
       } else {
-        if (!formData.name) handleValidatingData("nameVd", false);
-        if (!formData.email) handleValidatingData("emailVd", false);
-        if (!formData.phoneNumber) handleValidatingData("phoneNumberVd", false);
-        if (!formData.detailedAddress)
-          handleValidatingData("detailedAddressVd", false);
-        if (!formData.location) handleValidatingData("locationVd", false);
+        if (!formData.name) {
+          setNameVd("Nama harus di isi");
+        }
+        if (!formData.email) {
+          setEmailVd("Email Harus di isi");
+        } else if (validator.isEmail(!formData.email)) {
+          setEmailVd("Format Email tidak valid");
+        }
+        if (!formData.phoneNumber) {
+          setPhoneNumberVd("Nomor telepon Harus di isi");
+        } else if (validator.isMobilePhone(!formData.phoneNumber["id-ID"])) {
+          setPhoneNumberVd("Nomor Telepon tidak valid");
+        }
+        if (!formData.location) {
+          setLocationVd("Lokasi harus di isi");
+        }
+        if (!formData.detailedAddress) {
+          setDetailedAddressVd("Alamat Lengkap harus di isi");
+        }
       }
     }
   };

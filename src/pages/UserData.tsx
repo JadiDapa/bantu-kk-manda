@@ -3,34 +3,15 @@ import { LuUser2, LuMail, LuPhone } from "react-icons/lu";
 import Summary from "../components/Summary";
 import { useContext, useState } from "react";
 import { FormContext } from "../context/FormContext";
-
-interface ValidatedDataProps {
-  nameVd: boolean;
-  emailVd: boolean;
-  phoneNumberVd: boolean;
-  locationVd: boolean;
-  detailedAddressVd: boolean;
-}
-
-const defaultValidatedData: ValidatedDataProps = {
-  nameVd: true,
-  emailVd: true,
-  phoneNumberVd: true,
-  locationVd: true,
-  detailedAddressVd: true,
-};
+import validator from "validator";
 
 const UserData = () => {
   const { formData, handleChange, handleSubmit } = useContext(FormContext);
-  const [validatedData, setValidatedData] =
-    useState<ValidatedDataProps>(defaultValidatedData);
-
-  const handleValidatingData = (field: string, value: boolean) => {
-    setValidatedData({
-      ...validatedData,
-      [field]: value,
-    });
-  };
+  const [nameVd, setNameVd] = useState<string>("");
+  const [emailVd, setEmailVd] = useState<string>("");
+  const [phoneNumberVd, setPhoneNumberVd] = useState<string>("");
+  const [locationVd, setLocationVd] = useState<string>("");
+  const [detailedAddressVd, setDetailedAddressVd] = useState<string>("");
 
   return (
     <div className="pb-[136px]">
@@ -64,26 +45,22 @@ const UserData = () => {
               <input
                 onChange={(e) => {
                   handleChange("name", e.target.value);
-                  if (formData.name.length > 0) {
-                    handleValidatingData("nameVd", true);
-                  } else {
-                    handleValidatingData("nameVd", false);
-                  }
+                  formData.name.length < 1
+                    ? setNameVd("Nama harus di isi")
+                    : setNameVd("");
                 }}
                 value={formData.name}
                 type="text"
                 id="name"
                 placeholder="Nama"
                 className={`${
-                  validatedData.nameVd
-                    ? "outline-none"
-                    : " outline-1 outline-red-500 bg-red-50"
+                  nameVd
+                    ? "outline-1 outline-red-500 bg-red-50"
+                    : "outline-none"
                 }  p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm w-full outline`}
               />
             </div>
-            {!validatedData.nameVd && (
-              <small className="text-red-500">Nama wajib diisi</small>
-            )}
+            {nameVd && <small className="text-red-500">{nameVd}</small>}
 
             <div className="flex items-center gap-4">
               <label
@@ -93,21 +70,28 @@ const UserData = () => {
                 <LuMail />
               </label>
               <input
-                // onChange={(e) => {
-                //   handleChange("name", e.target.value);
-                //   if (formData.name.length > 0) {
-                //     handleValidatingData("nameVd", true);
-                //   } else {
-                //     handleValidatingData("nameVd", false);
-                //   }
-                // }}
+                onChange={(e) => {
+                  handleChange("email", e.target.value);
+                  if (formData.email.length < 1) {
+                    setEmailVd("Email Harus di isi");
+                  } else if (validator.isEmail(!formData.email)) {
+                    setEmailVd("Format Email tidak valid");
+                  } else {
+                    setEmailVd("");
+                  }
+                }}
                 value={formData.email}
                 type="text"
                 id="email"
                 placeholder="Email"
-                className="p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm outline-1 outline-blue w-full"
+                className={`${
+                  emailVd
+                    ? "outline-1 outline-red-500 bg-red-50"
+                    : "outline-none"
+                }  p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm w-full outline`}
               />
             </div>
+            {emailVd && <small className="text-red-500">{emailVd}</small>}
 
             <div className="flex items-center gap-4">
               <label
@@ -117,14 +101,32 @@ const UserData = () => {
                 <LuPhone />
               </label>
               <input
-                onChange={(e) => handleChange("phoneNumber", e.target.value)}
+                onChange={(e) => {
+                  handleChange("phoneNumber", e.target.value);
+                  if (formData.phoneNumber.length < 1) {
+                    setPhoneNumberVd("Nomor Telepon Harus di isi");
+                  } else if (
+                    validator.isMobilePhone(!formData.phoneNumber["id-ID"])
+                  ) {
+                    setPhoneNumberVd("Nomor Telepon tidak valid");
+                  } else {
+                    setPhoneNumberVd("");
+                  }
+                }}
                 value={formData.phoneNumber}
                 type="text"
                 id="phone"
                 placeholder="Phone"
-                className="p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm outline-1 outline-blue w-full"
+                className={`${
+                  phoneNumberVd
+                    ? "outline-1 outline-red-500 bg-red-50"
+                    : "outline-none"
+                }  p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm w-full outline`}
               />
             </div>
+            {phoneNumberVd && (
+              <small className="text-red-500">{phoneNumberVd}</small>
+            )}
 
             <div className="flex items-center gap-4 pl-2">
               <input
@@ -152,28 +154,50 @@ const UserData = () => {
             <div className="flex flex-col gap-2">
               <label htmlFor="location">Lokasi</label>
               <input
-                onChange={(e) => handleChange("location", e.target.value)}
+                onChange={(e) => {
+                  handleChange("location", e.target.value);
+                  formData.location.length < 1
+                    ? setLocationVd("Lokasi pelayanan harus diisi")
+                    : setLocationVd("");
+                }}
                 value={formData.location}
                 type="text"
                 id="location"
                 placeholder="Masukkan kecamatan/kota"
-                className="p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm outline-1 outline-blue"
+                className={`${
+                  locationVd.length > 0
+                    ? "outline-1 outline-red-500 bg-red-50"
+                    : "outline-none"
+                }  p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm w-full outline`}
               />
             </div>
+            {locationVd && <small className="text-red-500">{locationVd}</small>}
 
             <div className="flex flex-col gap-2 pb-8">
               <label htmlFor="address">Alamat Lengkap</label>
               <textarea
-                onChange={(e) =>
-                  handleChange("detailedAddress", e.target.value)
-                }
+                onChange={(e) => {
+                  handleChange("detailedAddress", e.target.value);
+                  formData.detailedAddress.length < 1
+                    ? setDetailedAddressVd(
+                        "Alamat lengkap pelanggan harus di isi"
+                      )
+                    : setDetailedAddressVd("");
+                }}
                 value={formData.detailedAddress}
                 id="address"
                 placeholder="Masukkan nomor rumah, rt/rw, name komplek, lantai apartemen"
                 cols={1}
                 rows={5}
-                className="p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm outline-1 outline-blue resize-none"
-              ></textarea>
+                className={`${
+                  locationVd
+                    ? "outline-1 outline-red-500 bg-red-50"
+                    : "outline-none"
+                } p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm outline  resize-none`}
+              />
+              {detailedAddressVd && (
+                <small className="text-red-500">{detailedAddressVd}</small>
+              )}
             </div>
           </div>
 
@@ -182,8 +206,11 @@ const UserData = () => {
           </div>
         </div>
         <Summary
-          validatedData={validatedData}
-          handleValidatingData={handleValidatingData}
+          setNameVd={setNameVd}
+          setEmailVd={setEmailVd}
+          setPhoneNumberVd={setPhoneNumberVd}
+          setLocationVd={setLocationVd}
+          setDetailedAddressVd={setDetailedAddressVd}
         />
       </form>
     </div>
