@@ -1,16 +1,62 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { ViewContext } from "../context/ViewContext";
 import { FormContext } from "../context/FormContext";
 
-const Summary = () => {
-  const { view, setView } = useContext(ViewContext) ?? {};
-  const { formData } = useContext(FormContext) ?? { formData: { total: "0" } };
+interface SummaryProps {
+  validatedData: object;
+  handleValidatingData: (field: string, value: boolean) => void;
+}
+
+const Summary = ({ validatedData, handleValidatingData }: SummaryProps) => {
+  const { view, setView } = useContext(ViewContext);
+  const { formData } = useContext(FormContext);
+  const [isMenuValid, setIsMenuValid] = useState<boolean>(true);
+
+  const productSelected =
+    formData.regular1 ||
+    formData.regular2 ||
+    formData.regular3 ||
+    formData.premium1 ||
+    formData.premium2 ||
+    formData.premium3;
+
+  const formFilled =
+    formData.name &&
+    formData.email &&
+    formData.phoneNumber &&
+    formData.detailedAddress &&
+    formData.location;
 
   const handleViewChange = () => {
-    if (setView) {
-      setView(view === "user-data" ? "verification" : "user-data");
-      window.scrollTo(0, 0);
+    if (view === "menu") {
+      if (
+        productSelected &&
+        formData.userGender &&
+        formData.massagerGender &&
+        formData.selectedDate &&
+        formData.selectedTime
+      ) {
+        setView("user-data");
+        window.scrollTo(0, 0);
+      } else {
+        // setIsMenuValid(false);
+        // window.scrollTo(0, 400);
+      }
+    }
+
+    if (view === "user-data") {
+      if (formFilled) {
+        setView("verification");
+        window.scrollTo(0, 0);
+      } else {
+        if (!formData.name) handleValidatingData("nameVd", false);
+        if (!formData.email) handleValidatingData("emailVd", false);
+        if (!formData.phoneNumber) handleValidatingData("phoneNumberVd", false);
+        if (!formData.detailedAddress)
+          handleValidatingData("detailedAddressVd", false);
+        if (!formData.location) handleValidatingData("locationVd", false);
+      }
     }
   };
 
@@ -36,6 +82,11 @@ const Summary = () => {
           </div>
         </div>
         <div className="flex-1">
+          {!isMenuValid && (
+            <div className="text-red-600 text-sm text-center">
+              Pastikan sudah memilih produk & mengisi semua form
+            </div>
+          )}
           <button
             onClick={handleViewChange}
             type="submit"

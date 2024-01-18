@@ -1,14 +1,35 @@
 import Navbar from "../components/Navbar";
 import { LuUser2, LuMail, LuPhone } from "react-icons/lu";
 import Summary from "../components/Summary";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FormContext } from "../context/FormContext";
 
+interface ValidatedDataProps {
+  nameVd: boolean;
+  emailVd: boolean;
+  phoneNumberVd: boolean;
+  locationVd: boolean;
+  detailedAddressVd: boolean;
+}
+
+const defaultValidatedData: ValidatedDataProps = {
+  nameVd: true,
+  emailVd: true,
+  phoneNumberVd: true,
+  locationVd: true,
+  detailedAddressVd: true,
+};
+
 const UserData = () => {
-  const { formData, handleChange, handleSubmit } = useContext(FormContext) ?? {
-    formData: { "": "" },
-    handleChange: () => {},
-    handleSubmit: () => {},
+  const { formData, handleChange, handleSubmit } = useContext(FormContext);
+  const [validatedData, setValidatedData] =
+    useState<ValidatedDataProps>(defaultValidatedData);
+
+  const handleValidatingData = (field: string, value: boolean) => {
+    setValidatedData({
+      ...validatedData,
+      [field]: value,
+    });
   };
 
   return (
@@ -25,7 +46,7 @@ const UserData = () => {
               value={formData.note}
               type="text"
               placeholder="Catatan tambahan pada jasa"
-              className="p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm  outline-1 outline-blue"
+              className={`p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm  outline-1 outline-blue`}
             />
           </div>
 
@@ -41,14 +62,28 @@ const UserData = () => {
                 <LuUser2 />
               </label>
               <input
-                onChange={(e) => handleChange("name", e.target.value)}
+                onChange={(e) => {
+                  handleChange("name", e.target.value);
+                  if (formData.name.length > 0) {
+                    handleValidatingData("nameVd", true);
+                  } else {
+                    handleValidatingData("nameVd", false);
+                  }
+                }}
                 value={formData.name}
                 type="text"
                 id="name"
                 placeholder="Nama"
-                className="p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm w-full outline-1 outline-blue"
+                className={`${
+                  validatedData.nameVd
+                    ? "outline-none"
+                    : " outline-1 outline-red-500 bg-red-50"
+                }  p-3 bg-grey rounded-lg placeholder:text-slate-500 max-md:text-sm w-full outline`}
               />
             </div>
+            {!validatedData.nameVd && (
+              <small className="text-red-500">Nama wajib diisi</small>
+            )}
 
             <div className="flex items-center gap-4">
               <label
@@ -58,7 +93,14 @@ const UserData = () => {
                 <LuMail />
               </label>
               <input
-                onChange={(e) => handleChange("email", e.target.value)}
+                // onChange={(e) => {
+                //   handleChange("name", e.target.value);
+                //   if (formData.name.length > 0) {
+                //     handleValidatingData("nameVd", true);
+                //   } else {
+                //     handleValidatingData("nameVd", false);
+                //   }
+                // }}
                 value={formData.email}
                 type="text"
                 id="email"
@@ -139,7 +181,10 @@ const UserData = () => {
             Powered By <b>WebApe.com</b>
           </div>
         </div>
-        <Summary />
+        <Summary
+          validatedData={validatedData}
+          handleValidatingData={handleValidatingData}
+        />
       </form>
     </div>
   );

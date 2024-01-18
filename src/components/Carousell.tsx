@@ -4,7 +4,7 @@ import carousel3 from "/carousel3.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
-const Carousell = () => {
+const Carousell: React.FC = () => {
   return (
     <div className="md:h-56 max-md:w-full">
       <div className="rounded-xl overflow-hidden">
