@@ -5,11 +5,11 @@ import { FormContext } from "../context/FormContext";
 import validator from "validator";
 
 interface SummaryProps {
-  setNameVd: (message: string) => void;
-  setEmailVd: (message: string) => void;
-  setPhoneNumberVd: (message: string) => void;
-  setLocationVd: (message: string) => void;
-  setDetailedAddressVd: (message: string) => void;
+  setNameVd?: (message: string) => void;
+  setEmailVd?: (message: string) => void;
+  setPhoneNumberVd?: (message: string) => void;
+  setLocationVd?: (message: string) => void;
+  setDetailedAddressVd?: (message: string) => void;
 }
 
 const Summary = ({
@@ -50,8 +50,8 @@ const Summary = ({
         setView("user-data");
         window.scrollTo(0, 0);
       } else {
-        // setIsMenuValid(false);
-        // window.scrollTo(0, 400);
+        setIsMenuValid(false);
+        window.scrollTo(0, 400);
       }
     }
 
@@ -60,23 +60,26 @@ const Summary = ({
         setView("verification");
         window.scrollTo(0, 0);
       } else {
-        if (!formData.name) {
+        if (!formData.name && setNameVd) {
           setNameVd("Nama harus di isi");
         }
-        if (!formData.email) {
+        if (!formData.email && setEmailVd) {
           setEmailVd("Email Harus di isi");
-        } else if (validator.isEmail(!formData.email)) {
+        } else if (!validator.isEmail(formData.email) && setEmailVd) {
           setEmailVd("Format Email tidak valid");
         }
-        if (!formData.phoneNumber) {
+        if (!formData.phoneNumber && setPhoneNumberVd) {
           setPhoneNumberVd("Nomor telepon Harus di isi");
-        } else if (validator.isMobilePhone(!formData.phoneNumber["id-ID"])) {
+        } else if (
+          !validator.isMobilePhone(formData.phoneNumber, "id-ID") &&
+          setPhoneNumberVd
+        ) {
           setPhoneNumberVd("Nomor Telepon tidak valid");
         }
-        if (!formData.location) {
+        if (!formData.location && setLocationVd) {
           setLocationVd("Lokasi harus di isi");
         }
-        if (!formData.detailedAddress) {
+        if (!formData.detailedAddress && setDetailedAddressVd) {
           setDetailedAddressVd("Alamat Lengkap harus di isi");
         }
       }

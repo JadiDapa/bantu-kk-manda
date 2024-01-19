@@ -45,23 +45,28 @@ const OrderDetail = () => {
         return 40000;
       case "tambahan2":
         return 80000;
+      default:
+        return 0;
     }
   };
 
   const orderedProduct = Object.entries(formData)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // eslint-disable-next-line
     .filter(([key, value]) => value > 0 && typeof value === "number")
     .map(([key, value]) => [key, value] as [string, number]);
 
   return (
     <div className="">
-      <div className="md:px-[30%] px-3">
-        <div className="w-full py-6 px-6 bg-white  flex flex-col gap-4">
-          <h1 className="text-3xl font-semibold">Order Summary</h1>
+      <div className="md:px-[30%]">
+        <div className="w-full py-6 px-6 bg-white">
+          <h1 className="text-3xl font-semibold mb-2 md:mb-4">Order Summary</h1>
           <div className="">
-            <div className="text-darkgrey capitalize font-semibold border-b-2 pb-1 border-darkgrey text-xl">
+            <div className="text-darkgrey capitalize font-semibold border-b-2 pb-1 border-darkgrey md:text-xl">
               ORDER DETAIL <span> - #18361201241800</span>
             </div>
-            <div className="flex flex-col text-[17px] text-slate-600 px-6">
+            <div className="flex flex-col text-sm md:text-[17px] text-slate-600 md:px-6">
               <div className="border-y border-grey py-3 flex flex-col gap-y-1">
                 <div className="flex justify-between">
                   <span className="flex-1">Customer</span>
@@ -70,7 +75,7 @@ const OrderDetail = () => {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="flex-1">Jenis Kelamin Customer</span>
+                  <span className="flex-1">Jenis Kelamin</span>
                   <span className="text-end flex-1">{formData.userGender}</span>
                 </div>
                 <div className="flex justify-between">
@@ -86,11 +91,11 @@ const OrderDetail = () => {
               </div>
               <div className="border-y border-grey py-3 flex flex-col gap-y-1">
                 <div className="flex justify-between">
-                  <span className="flex-1">Service Location</span>
+                  <span className="flex-1">Lokasi Pelayanan</span>
                   <span className="text-end flex-1">{formData.location}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="flex-1">Detailed Address</span>
+                  <span className="flex-1">Alamat Lengkap</span>
                   <span className="text-end flex-1">
                     {formData.detailedAddress}
                   </span>
@@ -117,8 +122,8 @@ const OrderDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col text-[17px] mt-6">
-              <div className="px-6 py-3 gap-2 bg-sky-200 text-slate-600  rounded-tl-3xl">
+            <div className="flex flex-col text-sm md:text-[17px] mt-6">
+              <div className="md:px-6 px-3 py-3 gap-2 bg-sky-200 text-slate-600 rounded-tl-xl  md:rounded-tl-3xl">
                 {orderedProduct.map(([key, value]) => (
                   <div className="flex justify-between" key={key}>
                     <span className="flex-1">
@@ -127,14 +132,14 @@ const OrderDetail = () => {
                     </span>
                     <span className="text-end flex-1">
                       Rp
-                      {Number(orderedProductPrice(key)).toLocaleString(
+                      {Number(orderedProductPrice(key) * value).toLocaleString(
                         "id-ID"
                       )}{" "}
                     </span>
                   </div>
                 ))}
               </div>
-              <div className="px-6 py-3 gap-2 bg-sky-400  rounded-br-3xl">
+              <div className="px-6 py-3 gap-2 bg-sky-400  rounded-br-xl  md:rounded-br-3xl">
                 <div className="flex justify-between font-semibold">
                   <span className="flex-1">Total :</span>
                   <span className="text-end flex-1">
@@ -144,13 +149,13 @@ const OrderDetail = () => {
               </div>
             </div>
             <div className="mt-6">
-              <div className="px-6 py-3 bg-magenta text-white text-xl text-center rounded-xl cursor-pointer hover:bg-magenta/90 transition-all duration-300">
+              <div className="md:px-6 px-2 md:py-3 py-2 bg-magenta text-white md:text-xl text-center rounded-xl cursor-pointer hover:bg-magenta/90 transition-all duration-300">
                 Bayar & Selesaikan Pesanan
               </div>
 
               <div
                 onClick={() => setView("menu")}
-                className="text-lg font-semibold underline text-center mt-6 cursor-pointer"
+                className="text-sm md:text-lg md:font-semibold underline text-center mt-6 cursor-pointer"
               >
                 Ubah Pesanan
               </div>

@@ -15,7 +15,7 @@ export const ViewContext = createContext<ViewContextProps>({
 export const ViewContextProvider = ({ children }: { children: ReactNode }) => {
   const [view, setView] = useState<
     "menu" | "user-data" | "verification" | "order-detail"
-  >("menu");
+  >("order-detail");
 
   return (
     <ViewContext.Provider value={{ view, setView }}>
