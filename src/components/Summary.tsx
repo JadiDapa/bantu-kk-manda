@@ -1,15 +1,89 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { ViewContext } from "../context/ViewContext";
 import { FormContext } from "../context/FormContext";
+import validator from "validator";
 
-const Summary = () => {
-  const { view, setView } = useContext(ViewContext) ?? {};
-  const { formData } = useContext(FormContext) ?? { formData: { total: "0" } };
+interface SummaryProps {
+  setNameVd: (message: string) => void;
+  setEmailVd: (message: string) => void;
+  setPhoneNumberVd: (message: string) => void;
+  setLocationVd: (message: string) => void;
+  setDetailedAddressVd: (message: string) => void;
+}
+
+const Summary = ({
+  setNameVd,
+  setEmailVd,
+  setPhoneNumberVd,
+  setLocationVd,
+  setDetailedAddressVd,
+}: SummaryProps) => {
+  const { view, setView } = useContext(ViewContext);
+  const { formData } = useContext(FormContext);
+  const [isMenuValid, setIsMenuValid] = useState<boolean>(true);
+
+  const productSelected =
+    formData.regular1 ||
+    formData.regular2 ||
+    formData.regular3 ||
+    formData.premium1 ||
+    formData.premium2 ||
+    formData.premium3;
+
+  const formFilled =
+    formData.name &&
+    formData.email &&
+    formData.phoneNumber &&
+    formData.location &&
+    formData.detailedAddress;
 
   const handleViewChange = () => {
-    if (setView) {
-      setView(view === "user-data" ? "verification" : "user-data");
+    if (view === "menu") {
+      if (
+        productSelected &&
+        formData.userGender &&
+        formData.massagerGender &&
+        formData.selectedDate &&
+        formData.selectedTime
+      ) {
+        setView("user-data");
+        window.scrollTo(0, 0);
+      } else {
+        // setIsMenuValid(false);
+        // window.scrollTo(0, 400);
+      }
+    }
+
+    if (view === "user-data") {
+      if (formFilled) {
+        setView("verification");
+        window.scrollTo(0, 0);
+      } else {
+        if (!formData.name) {
+          setNameVd("Nama harus di isi");
+        }
+        if (!formData.email) {
+          setEmailVd("Email Harus di isi");
+        } else if (validator.isEmail(!formData.email)) {
+          setEmailVd("Format Email tidak valid");
+        }
+        if (!formData.phoneNumber) {
+          setPhoneNumberVd("Nomor telepon Harus di isi");
+        } else if (validator.isMobilePhone(!formData.phoneNumber["id-ID"])) {
+          setPhoneNumberVd("Nomor Telepon tidak valid");
+        }
+        if (!formData.location) {
+          setLocationVd("Lokasi harus di isi");
+        }
+        if (!formData.detailedAddress) {
+          setDetailedAddressVd("Alamat Lengkap harus di isi");
+        }
+      }
+    }
+
+    if (view === "verification") {
+      setView("order-detail");
       window.scrollTo(0, 0);
     }
   };
@@ -32,10 +106,15 @@ const Summary = () => {
         <div className="flex-1">
           <div className="text-sm md:text-base">Estimasi Harga</div>
           <div className="text-blue md:text-3xl text-lg font-medium">
-            Rp{Number(formData.total).toLocaleString("en-US")}
+            Rp{Number(formData.total).toLocaleString("id-ID")}
           </div>
         </div>
         <div className="flex-1">
+          {!isMenuValid && (
+            <div className="text-red-600 text-sm text-center">
+              Pastikan sudah memilih produk & mengisi semua form
+            </div>
+          )}
           <button
             onClick={handleViewChange}
             type="submit"

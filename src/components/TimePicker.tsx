@@ -1,11 +1,18 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { FormContext } from "../context/FormContext";
 
 const TimePicker: React.FC = () => {
-  const { handleChange } = useContext(FormContext) ?? {
-    handleChange: () => {},
-  };
+  const { handleChange } = useContext(FormContext);
+  const { formData } = useContext(FormContext);
   const [time, setTime] = useState<string>("12:00");
+  const [hoursInt, setHoursInt] = useState("MM");
+  const [minutesInt, setMinuteInt] = useState("HH");
+
+  useEffect(() => {
+    const [hours, minutes] = formData.selectedTime.split(":");
+    setHoursInt(hours);
+    setMinuteInt(minutes);
+  }, [formData.selectedTime]);
 
   function arrangeHour(e: ChangeEvent<HTMLSelectElement>) {
     const hour = e.target.value;
@@ -24,6 +31,7 @@ const TimePicker: React.FC = () => {
   }
 
   const hours = [
+    "HH",
     "12",
     "13",
     "14",
@@ -38,7 +46,7 @@ const TimePicker: React.FC = () => {
     "23",
     "24",
   ];
-  const minutes = ["00", "30"];
+  const minutes = ["MM", "00", "30"];
 
   return (
     <div className="p-[18px] bg-white rounded-lg flex flex-col gap-4">
@@ -49,6 +57,7 @@ const TimePicker: React.FC = () => {
       <div className="border-[3px] text-lg py-2 md:py-3 rounded-xl border-grey hover:border-magenta w-full flex items-center justify-evenly transition-all duration-300">
         <select
           onChange={arrangeHour}
+          value={hoursInt}
           id="hours"
           className="flex-1 flex justify-center text-center appearance-none outline-none ring-transparent"
         >
@@ -62,6 +71,7 @@ const TimePicker: React.FC = () => {
         <span className="flex justify-center text-center">:</span>
         <select
           onChange={arrangeMinute}
+          value={minutesInt}
           id="minutes"
           className="flex-1 flex justify-center text-center appearance-none outline-none ring-transparent"
         >

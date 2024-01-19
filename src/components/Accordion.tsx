@@ -6,11 +6,8 @@ interface AccordionProps {
   title: string;
 }
 
-const Accordion: React.FC<AccordionProps> = ({
-  children,
-  title,
-}: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Accordion: React.FC<AccordionProps> = ({ children, title }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <div className="w-full bg-white">

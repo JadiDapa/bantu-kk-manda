@@ -5,7 +5,21 @@ import { IoIosArrowDown } from "react-icons/io";
 import Modal from "./Modal";
 import { FormContext } from "../context/FormContext";
 
-const OrderItem = ({ title, image, menus }) => {
+interface MenusObjectProps {
+  item: string;
+  price: string;
+  image: string;
+  code: string;
+  is_multiple: boolean;
+}
+
+interface OrderItemProps {
+  title: string;
+  image: string;
+  menus: MenusObjectProps[];
+}
+
+const OrderItem = ({ title, image, menus }: OrderItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { formData, addItem, removeItem } = useContext(FormContext);
@@ -53,29 +67,40 @@ const OrderItem = ({ title, image, menus }) => {
                   {menu.item}
                 </div>
                 <div className="md:text-lg font-medium  text-blue te leading-3">
-                  Rp{Number(menu.price).toLocaleString("en-US")}
+                  Rp{Number(menu.price).toLocaleString("id-ID")}
                 </div>
               </div>
             </div>
             <div className="flex gap-3">
               <div
-                onClick={() => addItem(menu.code, menu.price)}
+                onClick={() => {
+                  if (formData[menu.code] > 0) {
+                    if (menu.is_multiple) {
+                      addItem(menu.code, menu.price);
+                    } else {
+                      return;
+                    }
+                  } else {
+                    addItem(menu.code, menu.price);
+                  }
+                }}
                 className={` ${
-                  formData[menu.code] ? "border-darkgrey" : "border-magenta"
+                  !menu.is_multiple && formData[menu.code] > 0
+                    ? "border-darkgrey"
+                    : "border-magenta"
                 } border cursor-pointer  flex items-center justify-center w-6 md:w-8 aspect-square rounded-md`}
               >
                 +
               </div>
+              <div className="translate-y-1">{formData[menu.code]}</div>
               <div
-                onClick={() => console.log(formData)}
-                className="translate-y-1"
-              >
-                {formData[menu.code] ? "1" : "0"}
-              </div>
-              <div
-                onClick={() => removeItem(menu.code, menu.price)}
+                onClick={() => {
+                  if (formData[menu.code] > 0) {
+                    removeItem(menu.code, menu.price);
+                  }
+                }}
                 className={`border cursor-pointer ${
-                  formData[menu.code] ? "border-magenta" : "border-darkgrey"
+                  formData[menu.code] > 0 ? "border-magenta" : "border-darkgrey"
                 } flex items-center justify-center w-6 md:w-8 aspect-square rounded-md`}
               >
                 -

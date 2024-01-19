@@ -13,9 +13,7 @@ const Option = ({ question, opt1, opt2, input }: OptionProps) => {
   const option2ID = useId();
   const groupName = useId();
 
-  const { handleChange } = useContext(FormContext) ?? {
-    handleChange: () => {},
-  };
+  const { handleChange } = useContext(FormContext);
 
   return (
     <div className="bg-white rounded-lg">
@@ -29,7 +27,6 @@ const Option = ({ question, opt1, opt2, input }: OptionProps) => {
               onChange={(e) => handleChange(input, e.target.value)}
               id={option1ID}
               type="radio"
-              className=""
               name={groupName}
               value={opt1}
             />
