@@ -67,7 +67,7 @@ const OrderItem = ({ title, image, menus }: OrderItemProps) => {
                   {menu.item}
                 </div>
                 <div className="md:text-lg font-medium  text-blue te leading-3">
-                  Rp{Number(menu.price).toLocaleString("en-US")}
+                  Rp{Number(menu.price).toLocaleString("id-ID")}
                 </div>
               </div>
             </div>

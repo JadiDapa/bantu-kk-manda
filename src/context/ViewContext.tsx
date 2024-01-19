@@ -1,8 +1,10 @@
 import { createContext, ReactNode, useState } from "react";
 
 type ViewContextProps = {
-  view: "menu" | "user-data" | "verification";
-  setView: (newView: "menu" | "user-data" | "verification") => void;
+  view: "menu" | "user-data" | "verification" | "order-detail";
+  setView: (
+    newView: "menu" | "user-data" | "verification" | "order-detail"
+  ) => void;
 };
 
 export const ViewContext = createContext<ViewContextProps>({
@@ -11,9 +13,9 @@ export const ViewContext = createContext<ViewContextProps>({
 });
 
 export const ViewContextProvider = ({ children }: { children: ReactNode }) => {
-  const [view, setView] = useState<"menu" | "user-data" | "verification">(
-    "user-data"
-  );
+  const [view, setView] = useState<
+    "menu" | "user-data" | "verification" | "order-detail"
+  >("menu");
 
   return (
     <ViewContext.Provider value={{ view, setView }}>

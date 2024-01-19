@@ -81,6 +81,11 @@ const Summary = ({
         }
       }
     }
+
+    if (view === "verification") {
+      setView("order-detail");
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
@@ -101,7 +106,7 @@ const Summary = ({
         <div className="flex-1">
           <div className="text-sm md:text-base">Estimasi Harga</div>
           <div className="text-blue md:text-3xl text-lg font-medium">
-            Rp{Number(formData.total).toLocaleString("en-US")}
+            Rp{Number(formData.total).toLocaleString("id-ID")}
           </div>
         </div>
         <div className="flex-1">

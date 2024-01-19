@@ -4,15 +4,11 @@ import { FaArrowLeft } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { ViewContext } from "../context/ViewContext";
 import { FormContext } from "../context/FormContext";
-import ModalData from "../components/ModalData";
 
 const Verification = () => {
-  const { setView } = useContext(ViewContext) ?? { setView: () => {} };
-  const { formData } = useContext(FormContext) ?? {
-    formData: { phoneNumber: "" },
-  };
+  const { setView } = useContext(ViewContext);
+  const { formData } = useContext(FormContext);
   const [countdown, setCountdown] = useState(60);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     let interval: number;
@@ -24,10 +20,9 @@ const Verification = () => {
     }
 
     return () => {
-      console.log(formData);
       clearInterval(interval);
     };
-  }, [countdown, formData]);
+  }, [countdown]);
 
   return (
     <div className="pb-[160px]">
@@ -64,7 +59,7 @@ const Verification = () => {
           </div>
           <div className="">
             <button
-              onClick={() => setShowModal(!showModal)}
+              onClick={() => setView("order-detail")}
               className=" mt-4 w-4/5 md:w-1/2 py-2 bg-magenta text-white text-lg md:text-2xl rounded-lg cursor-pointer"
             >
               Verifikasi
@@ -95,11 +90,6 @@ const Verification = () => {
           </div>
         </div>
       </div>
-      <ModalData
-        setShowModal={setShowModal}
-        showModal={showModal}
-        data={formData}
-      />
     </div>
   );
 };
